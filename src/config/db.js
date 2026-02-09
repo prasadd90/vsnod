@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 
 const connectDB = async () => {
   try {
-    const mongoURI = process.env.MONGO_URI || "mongodb://localhost:27017/MyDB";
+    const mongoURI = process.env.MONGO_URI || "mongodb+srv://deshmukhprasad573_db_user:Oo6X5pKKXtXLLZAp@cluster0.critjdp.mongodb.net/";
     await mongoose.connect(mongoURI);
 
     if (mongoose.connection.readyState === 1) {
