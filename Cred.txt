@@ -1,0 +1,20 @@
+deshmukhprasad573@gmail.com
+
+
+deshmukhprasad573_db_user 
+
+Oo6X5pKKXtXLLZAp
+
+Connection String
+mongodb+srv://deshmukhprasad573_db_user:Oo6X5pKKXtXLLZAp@cluster0.critjdp.mongodb.net/
+
+
+https://cloud.mongodb.com/v2/6989e49f4074a406f5876a40#/overview?automateSecurity=true&connectCluster=Cluster0
+
+
+Path for MonogoDB Online DB : https://mongodb.com/atlas
+https://cloud.mongodb.com/v2/6989e49f4074a406f5876a40#/explorer/6989e57d524912a87dbaab4d/Global_ERP/User/find
+
+
+Deployment 
+https://dashboard.render.com/web/new?onboarding=active
