@@ -1,9 +1,10 @@
 const Registration = require("../models/user.model");
-
+const service = require("../ServiceLayer/user.service");
 /* CREATE */
 exports.createUser = async (req, res) => {
   try {
-    const user = await Registration.create(req.body);
+    //const user = await Registration.create(req.body);
+    const user = await service.createUser(req, res);
     res.status(201).json(user);
   } catch (error) {
     res.status(400).json({ message: error.message });
@@ -13,7 +14,8 @@ exports.createUser = async (req, res) => {
 /* GET ALL */
 exports.getAllUsers = async (req, res) => {
   try {
-    const users = await Registration.find();
+const users = await service.getAllUsers();
+    
     res.json(users);
     console.log('Retrieved all users:', users.length);
   } catch (error) {
@@ -25,8 +27,8 @@ exports.getAllUsers = async (req, res) => {
 /* GET BY ID */
 exports.getUserById = async (req, res) => {
   try {
-    const user = await Registration.findById(req.params.id);
-
+    // const user = await Registration.findById(req.params.id);
+const user = await service.getUserById(req.params.id);
     if (!user)
       return res.status(404).json({ message: "User not found" });
 
@@ -39,11 +41,13 @@ exports.getUserById = async (req, res) => {
 /* UPDATE */
 exports.updateUser = async (req, res) => {
   try {
-    const user = await Registration.findByIdAndUpdate(
-      req.params.id,
-      req.body,
-      { new: true }
-    );
+    // const user = await Registration.findByIdAndUpdate(
+    //   req.params.id,
+    //   req.body,
+    //   { new: true }
+    // );
+
+    const user = await service.updateUser(req);
 
     if (!user)
       return res.status(404).json({ message: "User not found" });
@@ -57,9 +61,10 @@ exports.updateUser = async (req, res) => {
 /* GET BY EXACT NAME */
 exports.getByName = async (req, res) => {
   try {
-    const user = await Registration.findOne({
-      UserName: req.params.UserName
-    });
+    // const user = await Registration.findOne({
+    //   UserName: req.params.UserName
+    // });
+    const user = await service.getByName(req);
 
     if (!user) {
       return res.status(404).json({ message: "User not available" });
@@ -77,14 +82,15 @@ exports.getByName = async (req, res) => {
 exports.SearchByName = async (req, res) => {
   try {
     // CONTAINS + case-insensitive
-    const user = await Registration.find({ UserName: { $regex: req.params.UserName, $options: "i" } });
+    //const user = await Registration.find({ UserName: { $regex: req.params.UserName, $options: "i" } });
+    const user = await service.SearchByName(req);
     
     if (!user || user.length === 0)
       return res.status(404).json({ message: "User not found" });
 
     res.json(user);
   } catch (error) {
-    res.status(400).json({ message: error.message });
+    res.status(400).json({ message: "Exception"+error.message });
     
   }
 };

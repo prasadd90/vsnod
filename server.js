@@ -1,11 +1,27 @@
 const express = require("express");
+const cors = require("cors");
 require("dotenv").config();
 
 const connectDB = require("./src/config/db.js");
 const userRoutes = require("./routes/user.routes.js");
 
 const app = express();
+// Enable CORS for all routes
+/* CORS Configuration */
+const corsOptions = {
+   
+   origin: "*",
+  credentials: false,
+  optionsSuccessStatus: 200,
+  methods: ["GET", "POST", "PUT", "DELETE", "PATCH"],
+  allowedHeaders: ["Content-Type", "Authorization"]
+};
 
+app.use(cors(corsOptions));
+//end core
+
+/* Middleware */
+app.use(express.json());
 /* Middleware */
 app.use(express.json());
 
