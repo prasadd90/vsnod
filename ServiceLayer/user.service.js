@@ -105,7 +105,7 @@ exports.SearchByName = async (req) => {
     res.status(400).json({ message: "Invalid ID" });
   }
 };
-
+// http://localhost:3000/api/users/email/nitin@gmail.com/password/password123
 exports.LoginByUserNameEmail = async (Email,Password) => {
   try {
      console.log("Login attempt for email:",  Email);
