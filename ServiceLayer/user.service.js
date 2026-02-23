@@ -1,3 +1,4 @@
+ 
 const Registration = require("../models/user.model");
 
 /* CREATE */
@@ -73,6 +74,7 @@ exports.getByName = async (req) => {
 
 
 
+
 /* GET BY Name contain logic like sql server */
 exports.SearchByName = async (req) => {
   try {
@@ -101,5 +103,29 @@ exports.SearchByName = async (req) => {
 
   } catch (error) {
     res.status(400).json({ message: "Invalid ID" });
+  }
+};
+
+exports.LoginByUserNameEmail = async (Email,Password) => {
+  try {
+     console.log("Login attempt for email:",  Email);
+      console.log("Login attempt for password:", Password);
+ 
+  
+    const user = await Registration.findOne({
+      Email: Email,
+      Password: Password
+    });
+    console.log("Login attempt for email:", user.Email);
+
+    if (!user) {
+       return null;
+    }
+ return user;
+
+  } catch (error) {
+     console.error("Login error:", error);
+     return null;
+   
   }
 };

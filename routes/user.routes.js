@@ -13,6 +13,7 @@ router.get("/UserName/:UserName", userController.getByName);
 router.get("/contains/:UserName", userController.SearchByName);
 router.delete("/delete/:id", userController.deleteUserById);
 
+router.get("/email/:email/password/:password", userController.loginByEmailPassword);
 
 module.exports = router;
 

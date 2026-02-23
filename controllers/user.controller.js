@@ -27,6 +27,7 @@ const users = await service.getAllUsers();
 /* GET BY ID */
 exports.getUserById = async (req, res) => {
   try {
+    console.log('Fetching user with ID:', req.params.id);
     // const user = await Registration.findById(req.params.id);
 const user = await service.getUserById(req.params.id);
     if (!user)
@@ -110,4 +111,20 @@ exports.SearchByName = async (req, res) => {
   }
 };
 
+ 
 
+exports.loginByEmailPassword = async (req, res) => {
+  try {
+      console.log("Login attempt for email:",  req.params.email);
+      console.log("Login attempt for password:", req.params.password);  
+    const user = await service.LoginByUserNameEmail( req.params.email, req.params.password);
+    if(!user) {  
+     
+      return res.status(404).json({ message: "User not found" }); 
+    }
+    res.json(user);
+     
+  } catch (error) {
+    res.status(400).json({ message: "Invalid ID" });
+  }
+};
