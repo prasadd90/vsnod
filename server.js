@@ -4,6 +4,7 @@ require("dotenv").config();
 
 const connectDB = require("./src/config/db.js");
 const userRoutes = require("./routes/user.routes.js");
+const studentRoutes = require("./routes/student.routes.js");
 
 const app = express();
 // Enable CORS for all routes
@@ -23,7 +24,7 @@ app.use(cors(corsOptions));
 /* Middleware */
 app.use(express.json());
 /* Middleware */
-app.use(express.json());
+//app.use(express.json());
 
 /* Health Check Endpoint */
 app.get("/api/health", (req, res) => {
@@ -31,7 +32,12 @@ app.get("/api/health", (req, res) => {
 });
 
 /* Routes */
+ 
+
+app.use("/api/students", studentRoutes);
+ 
 app.use("/api/users", userRoutes);
+
 
 /* Start Server */
 connectDB();
