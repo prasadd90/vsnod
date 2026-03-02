@@ -100,7 +100,7 @@ exports.SearchByName = async (req, res) => {
 
  exports.deleteStudentById = async (req, res) => {
   try {
-    const Student = await Registration.findByIdAndDelete(req.params.id);
+    const Student = await service.deleteStudentById(req, res);
 
     if (!Student)
       return res.status(404).json({ message: "Student not found" });
