@@ -15,7 +15,8 @@ exports.createStudent = async (req, res) => {
 exports.getAllStudents = async (req, res) => {
   try {
     
-    const Students = await student_model.find();
+    const Students = await student_model.find().find()
+  .sort({ _id: -1 });
      return (Students);
     console.log('Retrieved all Students:', Students.length);
   } catch (error) {
@@ -97,6 +98,8 @@ exports.SearchByName = async (req) => {
 
  exports.deleteStudentById = async (req, res) => {
   try {
+     
+      console.log("Delete function called with ID:", req.params.id);
     const Student = await student_model.findByIdAndDelete(req.params.id);
 
     if (!Student)

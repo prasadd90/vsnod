@@ -14,8 +14,11 @@ exports.createUser = async (req, res) => {
 /* GET ALL */
 exports.getAllUsers = async (req, res) => {
   try {
-    const users = await Registration.find();
-     return (users);
+    const users = await Registration
+  .find()
+  .sort({ _id: -1 });
+    //await Registration.find().sort({ createdAt: 1 }); // Sort by UserName in ascending order
+     return users;
     console.log('Retrieved all users:', users.length);
   } catch (error) {
     res.status(500).json({ message: error.message+"Error fetching users" });
@@ -107,6 +110,30 @@ exports.SearchByName = async (req) => {
 };
 // http://localhost:3000/api/users/email/nitin@gmail.com/password/password123
 exports.LoginByUserNameEmail = async (Email,Password) => {
+  try {
+     console.log("Login attempt for email:",  Email);
+      console.log("Login attempt for password:", Password);
+ 
+  
+    const user = await Registration.findOne({
+      Email: Email,
+      Password: Password
+    });
+    console.log("Login attempt for email:", user.Email);
+
+    if (!user) {
+       return null;
+    }
+ return user;
+
+  } catch (error) {
+     console.error("Login error:", error);
+     return null;
+   
+  }
+};
+
+exports.LoginByUserNameEmailToken = async (Email,Password) => {
   try {
      console.log("Login attempt for email:",  Email);
       console.log("Login attempt for password:", Password);

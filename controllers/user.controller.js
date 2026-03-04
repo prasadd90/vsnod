@@ -1,6 +1,14 @@
 const Registration = require("../models/user.model");
 const service = require("../ServiceLayer/user.service");
-/* CREATE */
+// start  for token
+
+const jwt = require("jsonwebtoken");
+const bcrypt = require("bcryptjs");
+// Secret key (store in .env in real projects)
+const JWT_SECRET = "your_secret_key";
+
+//End tokn code
+/* CREATE */// req >inout res > out out 
 exports.createUser = async (req, res) => {
   try {
     //const user = await Registration.create(req.body);
@@ -122,6 +130,22 @@ exports.loginByEmailPassword = async (req, res) => {
      
       return res.status(404).json({ message: "User not found" }); 
     }
+    res.json(user);
+     
+  } catch (error) {
+    res.status(400).json({ message: "Invalid ID" });
+  }
+};
+exports.loginByEmailPasswordToken = async (req, res) => {
+  try {
+      console.log("Login attempt for email:",  req.params.email);
+      console.log("Login attempt for password:", req.params.password);  
+    const user = await service.LoginByUserNameEmail( req.params.email, req.params.password);
+    if(!user) {  
+     
+      return res.status(404).json({ message: "User not found" }); 
+    }
+    
     res.json(user);
      
   } catch (error) {
